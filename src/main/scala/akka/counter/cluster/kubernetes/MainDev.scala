@@ -3,9 +3,9 @@ package akka.counter.cluster.kubernetes
 import akka.actor.typed.ActorSystem
 import com.typesafe.config.{Config, ConfigFactory}
 
-// for local development, uncomment when running locally
-//object Node1 extends App { new DevNode(1) }
-//object Node2 extends App { new DevNode(2) }
+// for local development, un-comment when running locally
+object Node1 extends App { new DevNode(1) }
+object Node2 extends App { new DevNode(2) }
 
 class DevNode(node: Int)  {
   val config: Config = ConfigFactory.parseString(
@@ -17,5 +17,5 @@ class DevNode(node: Int)  {
       akka.actor.serialize-messages = on
       akka.actor.serialize-creators = on
       """).withFallback(ConfigFactory.load())
-  ActorSystem[Nothing](MainBehavior.behaviors(8080 + node), "appka", config)
+  ActorSystem[Nothing](Booty.boot(8080 + node), "appka", config)
 }

@@ -19,7 +19,7 @@ class RQSRQueueManager(implicit val replicatedQueueStatusRegistry: ActorRef[Queu
     replicatedQueueStatusRegistry.ask {
       ref => GetQueueStatus(hashQueueNumber(queueNumber), ref)} /*implicits*/ (timeout, actorContext.system.scheduler)
         .map {
-          case QIDStatus(_, Some(_)) => None //qid already exists
+          case QIDStatus(_, Some(_)) => None //qid already exists, in this case, we want user to explicitly retry to get the new qid instead.
           case QIDStatus(qid, None) =>
             replicatedQueueStatusRegistry ! RegisterQID(qid, QueueStatus.Waiting)
             Some(qid)

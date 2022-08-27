@@ -1,4 +1,4 @@
-package queue.manager
+package akka.counter.cluster.kubernetes.queue.manager
 
 
 object QueueStatus extends Enumeration {
@@ -9,3 +9,5 @@ object QueueStatus extends Enumeration {
   val SiteEntered: Value = Value(2)
   val QueueExited: Value = Value(3)
 }
+
+

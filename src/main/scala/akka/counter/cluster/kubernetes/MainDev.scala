@@ -9,7 +9,6 @@ object Node2 extends App { new DevNode(2) }
 
 class DevNode(node: Int)  {
   val config: Config = ConfigFactory.parseString(
-    //TODO: Use dev config instead of ugly overriding here
     s"""akka.remote.artery.canonical.hostname = "127.0.0.$node"
       akka.management.http.hostname = "127.0.0.$node"
       akka.management.cluster.bootstrap.contact-point-discovery.discovery-method="config"

@@ -1,14 +1,19 @@
-package akka.counter.cluster.kubernetes
+package akka.counter.cluster.kubernetes.counter
 
-import akka.actor.typed.{ActorRef, Behavior}
 import akka.actor.typed.scaladsl.Behaviors
+import akka.actor.typed.{ActorRef, Behavior}
 
 object GlobalCounter {
   final val name = "GlobalCounter"
+
   sealed trait Command
+
   case object Increment extends Command
+
   final case class GetValue(replyTo: ActorRef[Int]) extends Command
+
   final case class RetrieveAndInc(replyTo: ActorRef[Int]) extends Command
+
   case object GoodByeCounter extends Command
 
   def apply(): Behavior[Command] = {
@@ -27,6 +32,7 @@ object GlobalCounter {
           Behaviors.stopped
       }
     }
+
     updated(0)
   }
 }

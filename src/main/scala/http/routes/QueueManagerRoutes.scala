@@ -39,6 +39,7 @@ class QueueManagerRoutes(implicit val ctx: ActorContext[Nothing],
       }
     }, path("deallocate-qid") {
       get {
+        // TODO: Deallocate the in the actual registry as well
         replicatedCounterActor ! Decrement
         complete(StatusCodes.OK, "Successful")
       }
